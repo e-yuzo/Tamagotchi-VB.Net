@@ -33,6 +33,7 @@ Public Class TamagotchiPage
                 MsgBox("Error : " & ex.Message)
             End Try
         End If
+        'test if pet is dead Here STOP TIMER
     End Sub
 
     Protected Sub Timer1_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer1.Tick
@@ -83,23 +84,16 @@ Public Class TamagotchiPage
         collection.Save(_pet)
     End Sub
 
-    Protected Sub SleepButton_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles bedbutton.Click
-        Dim _pet = GetQueriedPet()
-        _pet.Sleep_Action()
-        Dim collection = New DatabaseConnection().GetPetCollection()
-        collection.Save(_pet)
-    End Sub
-
     Protected Sub BathButton_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles bathbutton.Click
         Dim _pet = GetQueriedPet()
         _pet.Bath_Action()
         Dim collection = New DatabaseConnection().GetPetCollection()
         collection.Save(_pet)
     End Sub
-    'Style="background-image: url('Images/light-on.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;
+
     Protected Sub LightButton_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles lightsbutton.Click
         Dim _pet = GetQueriedPet()
-        _pet.Lights_Action()
+        _pet.Sleep_Action()
         If (_pet.State <> "Sleeping") Then
             lightsbutton.Attributes("style") = "background-image: url('Images/light-on.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"
             lightsbutton.Attributes("class") = "btn btn-warning btn-circle btn-xl"

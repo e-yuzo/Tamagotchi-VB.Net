@@ -32,7 +32,7 @@
             <div class="col-md-9">
                 <asp:ScriptManager ID="ScriptManager1" runat="server" />
                 <div>
-                    <asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="1000">
+                    <asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="2000">
                     </asp:Timer>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
@@ -69,7 +69,7 @@
                                 <asp:Label ID="statelabel" Text="text" runat="server" /></h6>
                         </div>
                         <div class="container">
-                            <img runat="server" src="Images/Kuriten.gif" alt="Kuriten"/>
+                            <img runat="server" src="Images/Fox.gif" alt="Kuriten"/>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -119,14 +119,14 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <br />
-                            <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+<%--                            <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:Button runat="server" ID="bedbutton" class="btn btn-warning btn-circle btn-xl" Style="background-image: url('Images/bed.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"></asp:Button>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="bedbutton" EventName="Click" />
                                 </Triggers>
-                            </asp:UpdatePanel>
+                            </asp:UpdatePanel>--%>
                             <br />
                             <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>

@@ -131,6 +131,7 @@
     <Content Include="Highscore.aspx" />
     <Content Include="Images\bathtub.png" />
     <Content Include="Images\bed.png" />
+    <Content Include="Images\Fox.gif" />
     <Content Include="Images\gameboy.png" />
     <Content Include="Images\Kuriten.gif" />
     <Content Include="Images\light-off.png" />

@@ -203,24 +203,6 @@ Partial Public Class TamagotchiPage
     Protected WithEvents bathbutton As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Controle UpdatePanel6.
-    '''</summary>
-    '''<remarks>
-    '''Campo gerado automaticamente.
-    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-    '''</remarks>
-    Protected WithEvents UpdatePanel6 As Global.System.Web.UI.UpdatePanel
-
-    '''<summary>
-    '''Controle bedbutton.
-    '''</summary>
-    '''<remarks>
-    '''Campo gerado automaticamente.
-    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-    '''</remarks>
-    Protected WithEvents bedbutton As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''Controle UpdatePanel7.
     '''</summary>
     '''<remarks>
