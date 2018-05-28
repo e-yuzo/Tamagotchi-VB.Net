@@ -350,5 +350,50 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
+<member name="F:Tamagotchi.TamagotchiPage._modalGame">
+<summary>
+Controle modalGame.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._bluebutton">
+<summary>
+Controle bluebutton.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._redbutton">
+<summary>
+Controle redbutton.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._yellowbutton">
+<summary>
+Controle yellowbutton.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._greenbutton">
+<summary>
+Controle greenbutton.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
 </members>
 </doc>

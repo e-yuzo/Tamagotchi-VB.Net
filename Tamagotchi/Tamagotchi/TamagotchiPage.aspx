@@ -69,13 +69,13 @@
                                 <asp:Label ID="statelabel" Text="text" runat="server" /></h6>
                         </div>
                         <div class="container">
-                            <img runat="server" src="Images/Fox.gif" alt="Kuriten"/>
+                            <img runat="server" src="Images/Fox.gif" alt="Kuriten" />
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
             </div>
-  <%--          <div class="col-md-1"></div>--%>
+            <%--          <div class="col-md-1"></div>--%>
             <div class="col-md-2">
                 <div class="container">
                     <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
@@ -119,7 +119,7 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <br />
-<%--                            <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+                            <%--                            <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:Button runat="server" ID="bedbutton" class="btn btn-warning btn-circle btn-xl" Style="background-image: url('Images/bed.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"></asp:Button>
                                 </ContentTemplate>
@@ -139,22 +139,73 @@
                             <br />
                             <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Button runat="server" ID="gamebutton" class="btn btn-warning btn-circle btn-xl" Style="background-image: url('Images/gameboy.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"></asp:Button>
+                                    <asp:Button runat="server" ID="gamebutton" class="btn btn-warning btn-circle btn-xl" Style="background-image: url('Images/gameboy.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;" data-toggle="modal" data-target="#modalGame"></asp:Button>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="gamebutton" EventName="Click" />
                                 </Triggers>
                             </asp:UpdatePanel>
-<%--                           <button type="button" class="btn btn-circle btn-xl">
-                                </button>--%>
-<%--                                <button type="button" class="btn btn-success btn-circle btn-xl">
-                                </button>
-                                <button type="button" class="btn btn-info btn-circle btn-xl">
-                                </button>
-                                <button type="button" class="btn btn-warning btn-circle btn-xl">
-                                </button>
-                                <button type="button" class="btn btn-danger btn-circle btn-xl">
-                                </button>--%>
+                            <%--Modal--%>
+                            <div runat="server" class="modal" id="modalGame" tabindex="-1" role="dialog" aria-labelledby="Simon Says" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Simon Says</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:Button runat="server" ID="bluebutton" class="btn btn-primary btn-circle btn-xl" Style="float: right; margin-top: 9%;"></asp:Button>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="bluebutton" EventName="Click" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                                <div class="col-md-4" style="text-align: center;">
+                                                    <asp:UpdatePanel ID="UpdatePanel9" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:Button runat="server" ID="redbutton" class="btn btn-danger btn-circle btn-xl" Style="margin-top: -10%;"></asp:Button>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="redbutton" EventName="Click" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+
+                                                    <asp:UpdatePanel ID="UpdatePanel10" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:Button runat="server" ID="yellowbutton" class="btn btn-warning btn-circle btn-xl" Style="margin-bottom: -10%;"></asp:Button>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="yellowbutton" EventName="Click" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel11" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:Button runat="server" ID="greenbutton" class="btn btn-success btn-circle btn-xl" Style="margin-top: 9%;"></asp:Button>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="greenbutton" EventName="Click" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <h5>Score: 
+                                                <asp:Label Text="0" runat="server" /></h5>
+                                        </div>
+                                    </div>
+                                    <%--Modal--%>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,6 +213,9 @@
             <div class="col-md-1"></div>
         </div>
     </form>
+    <script src="Content/jquery-3.3.1.slim.min.js"></script>
+    <script src="Content/popper.min.js"></script>
+    <script src="Content/bootstrap.min.js"></script>
 </body>
 </html>
 

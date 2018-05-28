@@ -90,5 +90,8 @@
             </div>
         </div>
     </form>
+        <script src="Content/jquery-3.3.1.slim.min.js"></script>
+    <script src="Content/popper.min.js"></script>
+    <script src="Content/bootstrap.min.js"></script>
 </body>
 </html>

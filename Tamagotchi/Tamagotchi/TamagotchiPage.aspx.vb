@@ -77,6 +77,8 @@ Public Class TamagotchiPage
         'wuts gon' happen
     End Sub
 
+
+
     Protected Sub CureButton_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles curebutton.Click
         Dim _pet = GetQueriedPet()
         _pet.Cure_Action()

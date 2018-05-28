@@ -173,7 +173,7 @@ Public Class Monster
         If (State = "Sleeping") Then 'quando esta dormindo o LastSleep representa a hora que foi dormir
             Dim minutesToSleep = Math.Abs((DateTime.UtcNow - WokeUp).TotalMinutes) / 3
             Dim minutesSlept = Math.Abs((DateTime.UtcNow - DropOff).TotalMinutes)
-            InitialTime.AddMinutes(minutesSlept / 1.5)
+            InitialTime.AddMinutes(minutesSlept / 3)
             If (minutesSlept >= minutesToSleep) Then 'dormiu o suficiente
                 WokeUp = DateTime.UtcNow
             Else 'nao dormiu o suficiente, considera o que dormiu
