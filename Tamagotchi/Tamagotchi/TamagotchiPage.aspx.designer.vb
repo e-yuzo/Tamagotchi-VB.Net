@@ -131,6 +131,24 @@ Partial Public Class TamagotchiPage
     Protected WithEvents statelabel As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''Controle belowimage.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents belowimage As Global.System.Web.UI.HtmlControls.HtmlImage
+    
+    '''<summary>
+    '''Controle topImage.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents topImage As Global.System.Web.UI.HtmlControls.HtmlImage
+    
+    '''<summary>
     '''Controle UpdatePanel2.
     '''</summary>
     '''<remarks>
@@ -239,6 +257,15 @@ Partial Public Class TamagotchiPage
     Protected WithEvents gamebutton As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''Controle Timer2.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents Timer2 As Global.System.Web.UI.Timer
+    
+    '''<summary>
     '''Controle modalGame.
     '''</summary>
     '''<remarks>
@@ -246,6 +273,24 @@ Partial Public Class TamagotchiPage
     '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
     '''</remarks>
     Protected WithEvents modalGame As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Controle UpdatePanel6.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents UpdatePanel6 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''Controle closemodal.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents closemodal As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''Controle bluebutton.
@@ -282,4 +327,22 @@ Partial Public Class TamagotchiPage
     '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
     '''</remarks>
     Protected WithEvents greenbutton As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Controle scorelabel.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents scorelabel As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Controle endgame.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents endgame As Global.System.Web.UI.WebControls.Button
 End Class

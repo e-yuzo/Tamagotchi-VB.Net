@@ -23,12 +23,21 @@ Public Class AccountInfo
     Protected Sub Create_Pet(ByVal sender As Object, ByVal e As System.EventArgs) Handles button1.Click
         Try
             Dim collection = New DatabaseConnection().GetPetCollection()
+            Dim minigameCollection = New DatabaseConnection().GetMinigameCollection()
             Dim petQuery = Query.And(Query.EQ("PlayerName", Session("Auth").ToString()), Query.EQ("MonsterName", petname.Text))
-            Dim _monsterDB = collection.FindOne(petQuery)
-            Dim _monster = New Monster() With {.PlayerName = Session("Auth").ToString(), .MonsterName = petname.Text, .State = "Normal", .LastTimeState = DateTime.UtcNow, .Happyness = 100, .Health = 100, .Hunger = 0}
+            Dim doc = collection.FindOne(petQuery)
+            'Dim _monsterDB As Monster = Nothing
+            'If (doc IsNot Nothing) Then
+            '    _monsterDB = New Monster(doc("_id"), doc("PlayerName"), doc("MonsterName"), doc("State"), doc("Hunger"), doc("Happyness"), doc("Health"), doc("LastTimeState"), doc("LastSleep"), doc("LastShower"), doc("InitialTime"), doc("WokeUp"), doc("DropOff"))
+            'End If
+            Dim time = DateTime.UtcNow
+            Dim _monster = New Monster(New ObjectId(), Session("Auth").ToString(), petname.Text, "Normal", 0, 100, 100, time, time, time, time, time, time)
+            'With {.PlayerName = Session("Auth").ToString(), .MonsterName = petname.Text, .State = "Normal", .LastTimeState = DateTime.UtcNow, .Happyness = 100, .Health = 100, .Hunger = 0}
             'Dim _monster As new Monster(parameters) //constructor and setters and getters and private attributes.
-            If _monsterDB Is Nothing Then
-                collection.Insert(_monster)
+            If doc Is Nothing Then
+                Dim minidoc As Minigame = New Minigame(New ObjectId(), Session("Auth").ToString(), petname.Text, 0, 0)
+                minigameCollection.Insert(New Utils().MinigameClassToBson(minidoc))
+                collection.Insert(New Utils().MonsterClassToBson(_monster))
                 Response.Redirect("AccountInfo.aspx", False)
             Else
                 MsgBox("Pet Name Already Exists.")
@@ -47,7 +56,7 @@ Public Class AccountInfo
         'Response.Redirect("TamagotchiPage.aspx", False)
     End Sub
 
-    Public Function Available_Pets2() As MongoCursor(Of Monster)
+    Protected Function Available_Pets2() As MongoCursor(Of BsonDocument)
         Dim collection = New DatabaseConnection().GetPetCollection()
         Dim _monster = collection.FindAll()
         Return _monster

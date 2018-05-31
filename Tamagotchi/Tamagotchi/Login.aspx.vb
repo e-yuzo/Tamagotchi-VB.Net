@@ -25,12 +25,16 @@ Public Class Login
         Try
             Dim collection = New DatabaseConnection().GetPlayerCollection()
             Dim loginQuery = Query.And(Query.EQ("Name", username.Text), Query.EQ("Password", password.Text))
-            Dim _player = collection.FindOne(loginQuery)
+            Dim doc = collection.FindOne(loginQuery)
+            Dim _player As Player = Nothing
+            If (doc IsNot Nothing) Then
+                _player = New Player(doc("_id"), doc("Name"), doc("Password"))
+            End If
 
             If _player Is Nothing Then
                 MsgBox("Wrong Username or Password.")
             Else
-                Session("Auth") = _player.Name
+                Session("Auth") = _player.GetName()
                 Response.Redirect("AccountInfo.aspx", False)
             End If
 

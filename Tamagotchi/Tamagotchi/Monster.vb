@@ -1,45 +1,161 @@
 ﻿Imports MongoDB.Bson
 
 Public Class Monster
-    Public Property Id As ObjectId
-    Public Property PlayerName As String
-    Public Property MonsterName As String
-    Public Property State As String
-    Public Property Hunger As Double
-    Public Property Happyness As Double
-    Public Property Health As Double
-    Public Property LastTimeState As DateTime
+    'Public Property Id As ObjectId
+    'Public Property PlayerName As String
+    'Public Property MonsterName As String
+    'Public Property State As String
+    'Public Property Hunger As Double
+    'Public Property Happyness As Double
+    'Public Property Health As Double
+    'Public Property LastTimeState As DateTime
+    'Public Property LastSleep As DateTime
+    'Public Property LastShower As DateTime
+    'Public Property InitialTime As DateTime
+    'Public Property WokeUp As DateTime
+    'Public Property DropOff As DateTime
+
+
+    Private Property Id As ObjectId
+    Private Property PlayerName As String
+    Private Property MonsterName As String
+    Private Property State As String
+    Private Property Hunger As Double
+    Private Property Happyness As Double
+    Private Property Health As Double
+    Private Property LastTimeState As DateTime
     Private Property LastSleep As DateTime
-    Private Property LastRest As DateTime
     Private Property LastShower As DateTime
-    Public Property InitialTime As DateTime
-    Public Property WokeUp As DateTime
-    Public Property DropOff As DateTime
+    Private Property InitialTime As DateTime
+    Private Property WokeUp As DateTime
+    Private Property DropOff As DateTime
 
-    'Public Sub New(id As ObjectId, playerName As String, monsterName As String, state As String, hunger As Double, happyness As Double, health As Double, lastTimeState As Date)
-    '    Me.Id = id
-    '    Me.PlayerName = playerName
-    '    Me.MonsterName = monsterName
-    '    Me.State = state
-    '    Me.Hunger = hunger
-    '    Me.Happyness = happyness
-    '    Me.Health = health
-    '    Me.LastTimeState = lastTimeState
-    'End Sub
 
-    'Public Property PlayerName() As String
-    '    Get
-    '        Return PlayerName
-    '    End Get
-    '    Set(ByVal value As String)
-    '        PlayerName = value
-    '    End Set
-    'End Property
+    Public Sub New(id As ObjectId, playerName As String, monsterName As String, state As String, hunger As Double, happyness As Double, health As Double, lastTimeState As Date, lastSleep As Date, lastShower As Date, initialTime As Date, wokeUp As Date, dropOff As Date)
+        Me.Id = id
+        Me.PlayerName = playerName
+        Me.MonsterName = monsterName
+        Me.State = state
+        Me.Hunger = hunger
+        Me.Happyness = happyness
+        Me.Health = health
+        Me.LastTimeState = lastTimeState
+        Me.LastSleep = lastSleep
+        Me.LastShower = lastShower
+        Me.InitialTime = initialTime
+        Me.WokeUp = wokeUp
+        Me.DropOff = dropOff
+    End Sub
+
+    Public Sub SetId(id As ObjectId)
+        Me.Id = id
+    End Sub
+
+    Public Function GetId() As ObjectId
+        Return Id
+    End Function
+
+    Public Sub SetPlayerName(name As String)
+        Me.PlayerName = name
+    End Sub
+
+    Public Function GetPlayerName() As String
+        Return PlayerName
+    End Function
+
+    Public Sub SetMonsterName(name As String)
+        Me.MonsterName = name
+    End Sub
+
+    Public Function GetMonsterName() As String
+        Return MonsterName
+    End Function
+
+    Public Sub SetState(state As String)
+        Me.State = state
+    End Sub
+
+    Public Function GetState() As String
+        Return State
+    End Function
+
+    Public Sub SetHunger(hunger As Double)
+        Me.Hunger = hunger
+    End Sub
+
+    Public Function GetHunger() As Double
+        Return Hunger
+    End Function
+
+    Public Sub SetHappyness(happy As Double)
+        Me.Happyness = happy
+    End Sub
+
+    Public Function GetHappyness() As Double
+        Return Happyness
+    End Function
+
+    Public Sub SetHealth(health As Double)
+        Me.Health = health
+    End Sub
+
+    Public Function GetHealth() As Double
+        Return Health
+    End Function
+
+    Public Sub SetLastTimeState(time As DateTime)
+        Me.LastTimeState = time
+    End Sub
+
+    Public Function GetLastTimeState() As DateTime
+        Return LastTimeState
+    End Function
+
+    Public Sub SetLastSleep(time As DateTime)
+        Me.LastSleep = time
+    End Sub
+
+    Public Function GetLastSleep() As DateTime
+        Return LastSleep
+    End Function
+
+    Public Sub SetLastShower(time As DateTime)
+        Me.LastShower = time
+    End Sub
+
+    Public Function GetLastShower() As DateTime
+        Return LastShower
+    End Function
+
+    Public Sub SetInitialTime(time As DateTime)
+        Me.InitialTime = time
+    End Sub
+
+    Public Function GetInitialTime() As DateTime
+        Return InitialTime
+    End Function
+
+    Public Sub SetWokeUp(time As DateTime)
+        Me.WokeUp = time
+    End Sub
+
+    Public Function GetWokeUp() As DateTime
+        Return WokeUp
+    End Function
+
+    Public Sub SetDropOff(time As DateTime)
+        Me.DropOff = time
+    End Sub
+
+    Public Function GetDropOff() As DateTime
+        Return DropOff
+    End Function
 
     Public Sub Update(Page_Reloaded As Boolean)
         Dim currentTime = DateTime.UtcNow
         Dim timeDiff = Get_Clock_Difference(currentTime, LastTimeState)
         Dim deltaTime = timeDiff / 1000000.0
+
         If Page_Reloaded = True Then
             InitialTime.AddMilliseconds(timeDiff / 2)
             Dim hungerRate As Integer = 1
@@ -48,28 +164,18 @@ Public Class Monster
 
             Dim random As System.Random = New System.Random()
 
-            Dim luck = random.Next(800, 1200) / 1000.0
-            Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-            luck = random.Next(800, 1200) / 1000.0
-            Health = Health - ((healthRate * luck) * deltaTime)
-            luck = random.Next(800, 1200) / 1000.0
-            Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+            SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
             Value_Limit()
-            Change_State()
+            If (State <> "Sleeping") Then
+                Change_State()
+            End If
         Else
             If State = "Normal" Then
                 Dim hungerRate As Integer = 5
                 Dim healthRate As Integer = 5
                 Dim happynessRate As Integer = 5
 
-                Dim random As System.Random = New System.Random()
-
-                Dim luck = random.Next(800, 1200) / 1000.0
-                Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Health = Health - ((healthRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+                SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
 
                 Value_Limit()
                 Change_State()
@@ -79,14 +185,7 @@ Public Class Monster
                 Dim healthRate As Integer = 20
                 Dim happynessRate As Integer = 20
 
-                Dim random As System.Random = New System.Random()
-
-                Dim luck = random.Next(800, 1200) / 1000.0
-                Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Health = Health - ((healthRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+                SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
 
                 Value_Limit()
                 Change_State()
@@ -96,14 +195,7 @@ Public Class Monster
                 Dim healthRate As Integer = 15
                 Dim happynessRate As Integer = 20
 
-                Dim random As System.Random = New System.Random()
-
-                Dim luck = random.Next(800, 1200) / 1000.0
-                Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Health = Health - ((healthRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+                SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
 
                 Value_Limit()
                 Change_State()
@@ -114,14 +206,7 @@ Public Class Monster
                 Dim healthRate As Integer = -10
                 Dim happynessRate As Integer = 1
 
-                Dim random As System.Random = New System.Random()
-
-                Dim luck = random.Next(800, 1200) / 1000.0
-                Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Health = Health - ((healthRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+                SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
 
                 Value_Limit()
 
@@ -130,14 +215,7 @@ Public Class Monster
                 Dim healthRate As Integer = 20
                 Dim happynessRate As Integer = 30
 
-                Dim random As System.Random = New System.Random()
-
-                Dim luck = random.Next(800, 1200) / 1000.0
-                Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Health = Health - ((healthRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+                SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
 
                 Value_Limit()
                 Change_State()
@@ -153,14 +231,7 @@ Public Class Monster
                     End If
                 End If
 
-                Dim random As System.Random = New System.Random()
-
-                Dim luck = random.Next(800, 1200) / 1000.0
-                Hunger = Hunger + ((hungerRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Health = Health - ((healthRate * luck) * deltaTime)
-                luck = random.Next(800, 1200) / 1000.0
-                Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+                SetValues_RateBased(hungerRate, healthRate, happynessRate, deltaTime)
 
                 Value_Limit()
                 Change_State()
@@ -169,14 +240,24 @@ Public Class Monster
         LastTimeState = currentTime
     End Sub
 
+    Private Sub SetValues_RateBased(hungerRate As Integer, healthRate As Integer, happynessRate As Integer, deltaTime As Double)
+        Dim random As System.Random = New System.Random()
+        Dim luck = random.Next(800, 1200) / 1000.0
+        Hunger = Hunger + ((hungerRate * luck) * deltaTime)
+        luck = random.Next(800, 1200) / 1000.0
+        Health = Health - ((healthRate * luck) * deltaTime)
+        luck = random.Next(800, 1200) / 1000.0
+        Happyness = Happyness - ((happynessRate * luck) * deltaTime)
+    End Sub
+
     Public Sub Sleep_Action()
-        If (State = "Sleeping") Then 'quando esta dormindo o LastSleep representa a hora que foi dormir
+        If (State = "Sleeping") Then
             Dim minutesToSleep = Math.Abs((DateTime.UtcNow - WokeUp).TotalMinutes) / 3
             Dim minutesSlept = Math.Abs((DateTime.UtcNow - DropOff).TotalMinutes)
             InitialTime.AddMinutes(minutesSlept / 3)
-            If (minutesSlept >= minutesToSleep) Then 'dormiu o suficiente
+            If (minutesSlept >= minutesToSleep) Then
                 WokeUp = DateTime.UtcNow
-            Else 'nao dormiu o suficiente, considera o que dormiu
+            Else
                 WokeUp.AddMinutes(minutesToSleep - minutesSlept)
             End If
             Change_State()
@@ -186,7 +267,7 @@ Public Class Monster
         End If
     End Sub
 
-    Public Sub Bath_Action() 'can get sick if no bath for too long
+    Public Sub Bath_Action()
         If (State <> "Sleeping") Then
             If (State = "Dirty") Then
                 LastShower = DateTime.UtcNow
@@ -200,7 +281,7 @@ Public Class Monster
         If (State <> "Sleeping") Then
             If (State = "Sick") Then
                 Dim random As System.Random = New System.Random()
-                Health = (Health + 30) - (Hunger * (random.Next(Int(Hunger), Int(Hunger + 20)) / 100))
+                Health = (Health + 30) - (Hunger * (random.Next(Int(Hunger), Int(Hunger + 20)) / 1000))
             Else
                 Health = (Health - 10)
             End If
@@ -211,11 +292,22 @@ Public Class Monster
 
     Public Sub Eat_Action()
         If (State <> "Sleeping") Then
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\feed.wav")
             Hunger = (Hunger - 20) + (Health / 10.0)
             Change_State()
             Value_Limit()
         End If
 
+    End Sub
+
+    Public Sub Game_Action(score As Integer)
+        If (State <> "Sleeping") Then
+            Hunger = Hunger + score
+            Happyness = Happyness + (score * 3)
+            Change_State()
+            Value_Limit()
+        End If
     End Sub
 
     Private Sub Change_State()
@@ -225,7 +317,7 @@ Public Class Monster
             State = "Sick"
         ElseIf (Happyness < 40) Then
             State = "Sad"
-        ElseIf (Math.Abs((DateTime.UtcNow - LastSleep).TotalHours) >= 3) Then '
+        ElseIf (Math.Abs((DateTime.UtcNow - WokeUp).TotalHours) >= 9) Then '
             State = "Sleepy"
         ElseIf (Math.Abs((DateTime.UtcNow - LastShower).TotalHours) >= 6) Then
             State = "Dirty"
@@ -271,5 +363,4 @@ Public Class Monster
             Return False
         End If
     End Function
-
 End Class

@@ -62,14 +62,14 @@
                             <% Dim count As Integer = 0 %>
                             <% If cursor IsNot Nothing Then %>
                             <% For each pet In cursor %>
-                            <% If (pet.PlayerName = Session("Auth").ToString()) Then %>
+                            <% If (pet("PlayerName") = Session("Auth").ToString()) Then %>
                             <% count = count + 1 %>
 
                             <div class="container col-md-3">
                                 <div class="card" style="width: 8rem;">
-                                    <a href='<%= pet.MonsterName %>'><img class="card-img-top" src="Images/Kuriten.gif" alt="Kuriten" /></a>
+                                    <a href='<%= pet("MonsterName") %>'><img class="card-img-top" src="Images/Kuriten.gif" alt="Kuriten" /></a>
                                     <div class="card-body">
-                                        <h5 class="card-title" style="text-align: center;"><%=pet.MonsterName%></h5>
+                                        <h5 class="card-title" style="text-align: center;"><%=pet("MonsterName")%></h5>
                                     </div>
                                 </div>
                             </div>

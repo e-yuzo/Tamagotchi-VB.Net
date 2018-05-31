@@ -10,15 +10,33 @@ Public Class DatabaseConnection
         Return database
     End Function
 
-    Public Function GetPetCollection() As MongoCollection(Of Monster)
+    Public Function GetPetCollection() As MongoCollection(Of BsonDocument)
         Dim database As MongoDatabase = GetConnection()
-        Dim collection = database.GetCollection(Of Monster)("Monsters")
+        Dim collection = database.GetCollection(Of BsonDocument)("Monsters")
         Return collection
     End Function
 
-    Public Function GetPlayerCollection() As MongoCollection(Of Player)
+    'Public Function GetPetCollectioCastn() As MongoCollection(Of Monster)
+    '    Dim database As MongoDatabase = GetConnection()
+    '    Dim collection = database.GetCollection(Of Monster)("Monsters")
+    '    Return collection
+    'End Function
+
+    Public Function GetPlayerCollection() As MongoCollection(Of BsonDocument)
         Dim database As MongoDatabase = GetConnection()
-        Dim collection = database.GetCollection(Of Player)("Players")
+        Dim collection = database.GetCollection(Of BsonDocument)("Players")
         Return collection
     End Function
+
+    Public Function GetMinigameCollection() As MongoCollection(Of BsonDocument)
+        Dim database As MongoDatabase = GetConnection()
+        Dim collection = database.GetCollection(Of BsonDocument)("Minigame")
+        Return collection
+    End Function
+
+    'Public Function GetPlayerCollectionCast() As MongoCollection(Of Player)
+    '    Dim database As MongoDatabase = GetConnection()
+    '    Dim collection = database.GetCollection(Of Player)("Players")
+    '    Return collection
+    'End Function
 End Class

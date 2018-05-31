@@ -68,12 +68,19 @@
                             <h6>State:
                                 <asp:Label ID="statelabel" Text="text" runat="server" /></h6>
                         </div>
-                        <div class="container">
-                            <img runat="server" src="Images/Fox.gif" alt="Kuriten" />
-                        </div>
+                        <%--Images--%>
+                        <%--<div id="under" style="left: 500px; top: 485px; position: absolute"> <img src="/img_articles/8470/image2.gif"> </div>--%>
+                        <%--<div class="container">--%>
+                            <div style="position:absolute;">
+                                <img id="belowimage" runat="server" src="Images/Normal.jpg" alt="State" style="width:1000px;height:345px;"/>
+                            </div>
+                            <div style="position:absolute;">
+                                <img id="topImage" runat="server" src="Images/Fox.gif" alt="Fox" style="max-width:200px; max-height:200px; margin-left: 360px; margin-top: 190px;"/>
+                            </div>
+                        <%--</div>--%>
+                        <%--Images--%>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-
             </div>
             <%--          <div class="col-md-1"></div>--%>
             <div class="col-md-2">
@@ -146,62 +153,44 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <%--Modal--%>
+                            <div>
+                                <asp:Timer ID="Timer2" OnTick="Game_Tick" runat="server" Interval="700">
+                                </asp:Timer>
+                            </div>
                             <div runat="server" class="modal" id="modalGame" tabindex="-1" role="dialog" aria-labelledby="Simon Says" aria-hidden="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Simon Says</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
-                                                        <ContentTemplate>
-                                                            <asp:Button runat="server" ID="bluebutton" class="btn btn-primary btn-circle btn-xl" Style="float: right; margin-top: 9%;"></asp:Button>
-                                                        </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:AsyncPostBackTrigger ControlID="bluebutton" EventName="Click" />
-                                                        </Triggers>
-                                                    </asp:UpdatePanel>
+                                        <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+                                            <ContentTemplate>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Simon Says</h5>
+                                                    <asp:Button ID="closemodal" runat="server" class="btn btn-circle btn-xl" data-dismiss="modal" Style="background-image: url('Images/close.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"></asp:Button>
                                                 </div>
-                                                <div class="col-md-4" style="text-align: center;">
-                                                    <asp:UpdatePanel ID="UpdatePanel9" runat="server" UpdateMode="Conditional">
-                                                        <ContentTemplate>
-                                                            <asp:Button runat="server" ID="redbutton" class="btn btn-danger btn-circle btn-xl" Style="margin-top: -10%;"></asp:Button>
-                                                        </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:AsyncPostBackTrigger ControlID="redbutton" EventName="Click" />
-                                                        </Triggers>
-                                                    </asp:UpdatePanel>
-
-                                                    <asp:UpdatePanel ID="UpdatePanel10" runat="server" UpdateMode="Conditional">
-                                                        <ContentTemplate>
-                                                            <asp:Button runat="server" ID="yellowbutton" class="btn btn-warning btn-circle btn-xl" Style="margin-bottom: -10%;"></asp:Button>
-                                                        </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:AsyncPostBackTrigger ControlID="yellowbutton" EventName="Click" />
-                                                        </Triggers>
-                                                    </asp:UpdatePanel>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <asp:Button runat="server" ID="bluebutton" OnClick="BlueButton_Event" class="btn btn-primary btn-circle btn-xl" Style="float: right; margin-top: 9%;"></asp:Button>
+                                                        </div>
+                                                        <div class="col-md-4" style="text-align: center;">
+                                                            <asp:Button runat="server" ID="redbutton" OnClick="RedButton_Event" class="btn btn-danger btn-circle btn-xl" Style="margin-top: -10%;"></asp:Button>
+                                                            <asp:Button runat="server" ID="yellowbutton" OnClick="YellowButton_Event" class="btn btn-warning btn-circle btn-xl" Style="margin-bottom: -10%;"></asp:Button>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <asp:Button runat="server" ID="greenbutton" OnClick="GreenButton_Event" class="btn btn-success btn-circle btn-xl" Style="margin-top: 9%;"></asp:Button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <asp:UpdatePanel ID="UpdatePanel11" runat="server" UpdateMode="Conditional">
-                                                        <ContentTemplate>
-                                                            <asp:Button runat="server" ID="greenbutton" class="btn btn-success btn-circle btn-xl" Style="margin-top: 9%;"></asp:Button>
-                                                        </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:AsyncPostBackTrigger ControlID="greenbutton" EventName="Click" />
-                                                        </Triggers>
-                                                    </asp:UpdatePanel>
+                                                <div class="modal-footer">
+                                                    <h5>Score: 
+                                                        <asp:Label ID="scorelabel" runat="server" Text="0" />
+                                                    </h5>
+                                                    <asp:Button runat="server" ID="endgame" OnClick="EndGame_Event" class="btn btn-circle btn-xl" Style="background-image: url('Images/foxb.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"></asp:Button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <h5>Score: 
-                                                <asp:Label Text="0" runat="server" /></h5>
-                                        </div>
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="Timer2" EventName="Tick" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
                                     </div>
                                     <%--Modal--%>
                                 </div>

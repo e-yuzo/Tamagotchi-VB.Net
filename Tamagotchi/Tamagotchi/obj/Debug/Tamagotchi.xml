@@ -242,6 +242,24 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
+<member name="F:Tamagotchi.TamagotchiPage._belowimage">
+<summary>
+Controle belowimage.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._topImage">
+<summary>
+Controle topImage.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
 <member name="F:Tamagotchi.TamagotchiPage._UpdatePanel2">
 <summary>
 Controle UpdatePanel2.
@@ -350,9 +368,36 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
+<member name="F:Tamagotchi.TamagotchiPage._Timer2">
+<summary>
+Controle Timer2.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
 <member name="F:Tamagotchi.TamagotchiPage._modalGame">
 <summary>
 Controle modalGame.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._UpdatePanel6">
+<summary>
+Controle UpdatePanel6.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._closemodal">
+<summary>
+Controle closemodal.
 </summary>
 <remarks>
 Campo gerado automaticamente.
@@ -389,6 +434,24 @@ Modificar a declaração do campo de movimento do arquivo de designer para o arq
 <member name="F:Tamagotchi.TamagotchiPage._greenbutton">
 <summary>
 Controle greenbutton.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._scorelabel">
+<summary>
+Controle scorelabel.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._endgame">
+<summary>
+Controle endgame.
 </summary>
 <remarks>
 Campo gerado automaticamente.

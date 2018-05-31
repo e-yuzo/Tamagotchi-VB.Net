@@ -41,25 +41,52 @@
                             <tr>
                                 <th scope="col">Player Name</th>
                                 <th scope="col">Pet Name</th>
+                                <th scope="col">Total Played</th>
+                                <th scope="col">Max Score</th>
+                                <th scope="col">Date of Death</th>
+                                <th scope="col">Total Points</th>
                                 <%--<th scope="col">Time Alive</th>--%>
                             </tr>
                         </thead>
                         <tbody>
-                            <% Dim cursor = getAllPets() %>
+                            <% Dim cursorPet = getAllPets() %>
+                            <% Dim cursorMinigame = getAllMinigames() %>
                             <% Dim count As Integer = 0 %>
-                            <% If cursor IsNot Nothing Then %>
-                            <% For each pet In cursor %>
+                            <% If cursorPet IsNot Nothing Then %>
+                            <% For each pet In cursorPet %>
+                            <% For each minigame In cursorMinigame %>
+                            <% If (pet("PlayerName") = minigame("PlayerName")) And (pet("MonsterName") = minigame("MonsterName")) Then %>
                             <% count = count + 1 %>
 
                             <tr>
                                 <td>
-                                    <%= pet.PlayerName %>
+                                    <%= pet("PlayerName") %>
                                 </td>
                                 <td>
-                                    <%= pet.MonsterName %>
+                                    <%= pet("MonsterName") %>
+                                </td>
+                                 <td>
+                                    <%= minigame("NumberOfGames") %>
+                                </td>
+                                 <td>
+                                    <%= minigame("MaxScore") %>
+                                </td>
+                                 <td>
+                                    <%If (pet("State") = "Dead") Then %>
+                                    <%= pet("LastTimeState") %>
+                                    <%Else%>
+                                    ---
+                                    <%End if %>
+                                </td>
+                                 <td>
+                                    <%Dim last As DateTime = Convert.ToDateTime(pet("LastTimeState")) %>
+                                    <%Dim init As DateTime = Convert.ToDateTime(pet("InitialTime")) %>
+                                    <%Dim diff As Double = Math.Abs((last - init).TotalSeconds) %>
+                                    <%= diff  %>
                                 </td>
                             </tr>
-
+                            <% End If %>
+                            <% Next %>
                             <% Next %>
                             <% End If %>
                             <% If (count = 0) Then %>

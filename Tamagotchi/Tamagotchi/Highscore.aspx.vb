@@ -21,10 +21,17 @@ Public Class Highscore
     'Protected Sub Construct_Table(ByVal sender As Object, ByVal e As System.EventArgs)
 
     'End Sub
-    Public Function getAllPets() As MongoCursor(Of Monster)
+    Protected Function getAllPets() As MongoCursor(Of BsonDocument)
         Dim collection = New DatabaseConnection().GetPetCollection()
         Dim _monster = collection.FindAll()
+
         Return _monster
+    End Function
+
+    Protected Function getAllMinigames() As MongoCursor(Of BsonDocument)
+        Dim collection = New DatabaseConnection().GetMinigameCollection()
+        Dim _minigame = collection.FindAll()
+        Return _minigame
     End Function
 
     Protected Sub Leave_Event(ByVal sender As Object, ByVal e As System.EventArgs)
