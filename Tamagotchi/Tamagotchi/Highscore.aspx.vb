@@ -1,13 +1,5 @@
 ﻿Imports MongoDB.Bson
 Imports MongoDB.Driver
-Imports MongoDB.Driver.Builders
-Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
-Imports System.Web.Security
-Imports System.Web.Routing
 
 Public Class Highscore
     Inherits System.Web.UI.Page
@@ -18,9 +10,6 @@ Public Class Highscore
 
     End Sub
 
-    'Protected Sub Construct_Table(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    'End Sub
     Protected Function getAllPets() As MongoCursor(Of BsonDocument)
         Dim collection = New DatabaseConnection().GetPetCollection()
         Dim _monster = collection.FindAll()

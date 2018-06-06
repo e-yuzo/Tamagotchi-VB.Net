@@ -1,5 +1,4 @@
 ﻿Imports MongoDB.Bson
-Imports MongoDB.Driver
 Imports MongoDB.Driver.Builders
 
 Public Class CreateAcc
@@ -16,13 +15,10 @@ Public Class CreateAcc
     Protected Sub CreateAcc_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles button1.Click
         Try
             Dim collection = New DatabaseConnection().GetPlayerCollection()
-            'Dim _player = New Player() With {.Name = username.Text, .Password = password.Text}
             Dim _player As Player = New Player(New ObjectId(), username.Text.ToString(), password.Text.ToString())
-            'MsgBox(_player.GetPassword())
             Dim userQuery = Query.EQ("Name", username.Text)
             Dim doc = collection.FindOne(userQuery)
             If doc Is Nothing Then
-
                 collection.Insert(New Utils().PlayerClassToBson(_player))
                 Session("Auth") = ""
                 Response.Redirect("Login.aspx", False)

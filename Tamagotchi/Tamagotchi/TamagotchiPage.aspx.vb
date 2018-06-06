@@ -1,18 +1,9 @@
-﻿Imports MongoDB.Bson
-Imports MongoDB.Driver
-Imports MongoDB.Driver.Builders
-Imports System.Threading
-Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
-Imports System.Web.Security
-
+﻿Imports MongoDB.Driver.Builders
 
 Public Class TamagotchiPage
     Inherits System.Web.UI.Page
 
+    'Functions that handles Timer's Intervals
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Session("Auth") Is Nothing Or Session("Auth") = "") Then
             Response.Redirect("Login.aspx", False)
@@ -28,7 +19,25 @@ Public Class TamagotchiPage
             Timer2.Enabled = False
             Try
                 Update_Panels(_pet)
+
+                Dim initialTime = _pet.GetInitialTime
+                Dim lastTimeState = _pet.GetLastTimeState
+
                 _pet.Update(True)
+
+                If (_pet.GetState = "Dead") Then
+                    _pet.SetInitialTime(initialTime)
+                    _pet.SetLastTimeState(lastTimeState)
+                End If
+
+                If (_pet.GetState <> "Sleeping") Then
+                    lightsbutton.Attributes("style") = "background-image: url('Images/light-on.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"
+                    lightsbutton.Attributes("class") = "btn btn-warning btn-circle btn-xl"
+                Else
+                    lightsbutton.Attributes("style") = "background-image: url('Images/light-off.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"
+                    lightsbutton.Attributes("class") = "btn btn-circle btn-xl"
+                End If
+
                 collection.Save(New Utils().MonsterClassToBson(_pet))
             Catch ex As Exception
                 MsgBox("Error : " & ex.Message)
@@ -40,9 +49,7 @@ Public Class TamagotchiPage
             topImage.Attributes.Remove("src")
             topImage.Attributes.Remove("alt")
         End If
-        'src="Images/Normal.jpg"
-        belowimage.Attributes("src") = "Images/" + _pet.GetState.ToString() + ".jpg"
-        'test if pet is dead Here STOP TIMER
+        background.Attributes("src") = "Images/" + _pet.GetState.ToString() + ".jpg"
     End Sub
 
     Protected Sub Timer1_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer1.Tick
@@ -60,18 +67,15 @@ Public Class TamagotchiPage
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         End Try
-        'Timer1.Enabled = True
     End Sub
 
+    'Delete Pet function
     Protected Sub DeletePet_Event(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Timer1.Enabled = False
         Try
             Dim petname = Page.RouteData.Values("petname")
             Dim collection = New DatabaseConnection().GetPetCollection()
             Dim minigameCollection = New DatabaseConnection().GetMinigameCollection()
             Dim petQuery = Query.And(Query.EQ("PlayerName", Session("Auth").ToString()), Query.EQ("MonsterName", petname.ToString()))
-            'Dim _monster = collection.FindOne(petQuery)
-            'Dim _minigame = minigameCollection.FindOne(petQuery)
             collection.Remove(petQuery)
             minigameCollection.Remove(petQuery)
             Response.Redirect("AccountInfo.aspx", False)
@@ -80,22 +84,20 @@ Public Class TamagotchiPage
         End Try
     End Sub
 
+    'Logout function
     Protected Sub SignOut_Event(ByVal sender As Object, ByVal e As System.EventArgs)
         Session("Auth") = ""
         Response.Redirect("Login.aspx", False)
     End Sub
 
-    'Game Buttons
+    'Memory Game functions
     Protected Sub Game_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer2.Tick
-        'MsgBox("4")
         Disable_GameButtons(True)
         Timer2.Enabled = False
-        'MsgBox(Session("Sequence").ToString())
         Dim count As Integer = Int(Session("Count"))
         Dim score As Integer = Int(Session("Score"))
         Dim sequence As String = Session("Sequence").ToString()
         If (count < score) Then
-            'MsgBox(sequence(count).ToString())
             If (sequence(count).ToString() = "1") Then
                 bluebutton.Attributes.Remove("disabled")
                 'bluebutton.Attributes("style") = "float:right;margin-top:9%;background-color:#0097FF;"
@@ -113,6 +115,8 @@ Public Class TamagotchiPage
                 'greenbutton.Attributes("style") = "margin-top:9%;background-color:#00FF1F;"
                 'greenbutton.Attributes("style") = "margin-top:9%;"
             End If
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\beep.wav")
             Session("Count") = (Int(Session("Count")) + 1).ToString()
             Timer2.Enabled = True
         Else
@@ -123,7 +127,7 @@ Public Class TamagotchiPage
             End If
         End If
     End Sub
-    'bleu red yellow green
+    'Sequence: blue red yellow green
     Protected Sub YellowButton_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles yellowbutton.Click
         Dim sequence As String = Session("Sequence").ToString()
         Session("UserSequence") = Session("UserSequence").ToString() + "3"
@@ -200,8 +204,8 @@ Public Class TamagotchiPage
         Session("Count") = "0"
         Dim _pet As Monster = GetQueriedPet()
         Dim _minigame As Minigame = GetQueriedMinigame()
-        _pet.Game_Action(score)
-        _minigame.SetMaxScore(Int(scorelabel.Text))
+        _pet.Game_Action(score - 1)
+        _minigame.SetMaxScore(score - 1)
         _minigame.SetNumberOfGames()
         Dim collection = New DatabaseConnection().GetPetCollection()
         Dim minigameCollection = New DatabaseConnection().GetMinigameCollection()
@@ -225,8 +229,6 @@ Public Class TamagotchiPage
         Dim random As Integer = New System.Random().Next(1, 5)
         Dim sequence As String = Session("Sequence").ToString()
         If (sequence.Length() <> 0) Then
-            'MsgBox(Int(Session("Score")).ToString())
-            'MsgBox((sequence(Int(Session("Score")) - 1)).ToString())
             Dim lastRandom As String = sequence(Int(Session("Score")) - 1)
             While (random.ToString() = lastRandom)
                 random = New System.Random().Next(1, 5)
@@ -249,7 +251,7 @@ Public Class TamagotchiPage
         End If
     End Sub
 
-    'Action Buttons
+    'Action Buttons functions
     Protected Sub CureButton_Event(ByVal sender As Object, ByVal e As System.EventArgs) Handles curebutton.Click
         Dim _pet = GetQueriedPet()
         _pet.Cure_Action()
@@ -268,12 +270,9 @@ Public Class TamagotchiPage
         Dim _pet = GetQueriedPet()
         _pet.Sleep_Action()
         If (_pet.GetState <> "Sleeping") Then
-            'Disable_ActionButtons(False)
             lightsbutton.Attributes("style") = "background-image: url('Images/light-on.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"
             lightsbutton.Attributes("class") = "btn btn-warning btn-circle btn-xl"
         Else
-            'Disable_ActionButtons(True)
-            'lightsbutton.Attributes.Remove("disabled")
             lightsbutton.Attributes("style") = "background-image: url('Images/light-off.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"
             lightsbutton.Attributes("class") = "btn btn-circle btn-xl"
         End If
@@ -285,7 +284,7 @@ Public Class TamagotchiPage
         Dim _pet As Monster = GetQueriedPet()
         _pet.Eat_Action()
         Dim collection = New DatabaseConnection().GetPetCollection()
-        collection.Save(New Utils().MonsterClassToBson(_pet)) 'h########################################################
+        collection.Save(New Utils().MonsterClassToBson(_pet))
     End Sub
 
     Private Sub Disable_ActionButtons(bool As Boolean)
@@ -304,6 +303,7 @@ Public Class TamagotchiPage
         End If
     End Sub
 
+    'Database functions
     Private Function GetQueriedPet() As Monster
         Dim petname = Page.RouteData.Values("petname")
         Dim collection = New DatabaseConnection().GetPetCollection()
@@ -322,6 +322,7 @@ Public Class TamagotchiPage
         Return _minigame
     End Function
 
+    'Update graphics functions
     Private Sub Update_Panels(_pet As Monster)
         hungerBar.Attributes("style") = "width:" + (Int(_pet.GetHunger).ToString()) + "%;"
         hungerlabel.Text = _pet.GetHunger.ToString()
@@ -330,9 +331,8 @@ Public Class TamagotchiPage
         happynessBar.Attributes("style") = "width:" + (Int(_pet.GetHappyness).ToString()) + "%;"
         happylabel.Text = _pet.GetHappyness.ToString()
         statelabel.Text = _pet.GetState
-        Label1.Text = DateTime.Now.ToLongTimeString()
+        Label1.Text = DateTime.UtcNow.ToLongTimeString()
         Change_Bars_Warnings(_pet.GetHealth, _pet.GetHunger, _pet.GetHappyness)
-        'MsgBox("first")
     End Sub
 
     Private Sub Change_Bars_Warnings(health As Double, hunger As Double, happyness As Double)

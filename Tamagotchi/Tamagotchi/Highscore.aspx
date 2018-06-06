@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Highscore.aspx.vb" Inherits="Tamagotchi.Highscore" %>
+
 <%@ Import Namespace="MongoDB.Driver.Builders" %>
 <%@ Import Namespace="MongoDB.Driver" %>
-<%@ Import Namespace="MongoDB.Bson" %> 
+<%@ Import Namespace="MongoDB.Bson" %>
 
 <!DOCTYPE html>
 
@@ -25,16 +26,13 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="Highscore.aspx">HighScores <span class="sr-only">(current)</span></a>
                     </li>
-<%--                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>--%>
                 </ul>
                 <asp:LinkButton ID="leave" Text="Leave" OnClick="Leave_Event" class="navbar-brand" runat="server" />
             </div>
         </nav>
         <div class="container">
             <div class="row" style="margin-top: 5%;">
-                <div class="col-md-4"></div>
+                <div class="col-md-3"></div>
                 <div class="col-md-4">
                     <table class="table">
                         <thead class="thead-dark">
@@ -45,7 +43,6 @@
                                 <th scope="col">Max Score</th>
                                 <th scope="col">Date of Death</th>
                                 <th scope="col">Total Points</th>
-                                <%--<th scope="col">Time Alive</th>--%>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,20 +62,20 @@
                                 <td>
                                     <%= pet("MonsterName") %>
                                 </td>
-                                 <td>
+                                <td>
                                     <%= minigame("NumberOfGames") %>
                                 </td>
-                                 <td>
+                                <td>
                                     <%= minigame("MaxScore") %>
                                 </td>
-                                 <td>
+                                <td>
                                     <%If (pet("State") = "Dead") Then %>
-                                    <%= pet("LastTimeState") %>
+                                    <%= Convert.ToDateTime(pet("LastTimeState")).ToString("dd/MM/yyyy HH:mm:ss") %>
                                     <%Else%>
                                     ---
                                     <%End if %>
                                 </td>
-                                 <td>
+                                <td>
                                     <%Dim last As DateTime = Convert.ToDateTime(pet("LastTimeState")) %>
                                     <%Dim init As DateTime = Convert.ToDateTime(pet("InitialTime")) %>
                                     <%Dim diff As Double = Math.Abs((last - init).TotalSeconds) %>
@@ -98,7 +95,7 @@
             </div>
         </div>
     </form>
-        <script src="Content/jquery-3.3.1.slim.min.js"></script>
+    <script src="Content/jquery-3.3.1.slim.min.js"></script>
     <script src="Content/popper.min.js"></script>
     <script src="Content/bootstrap.min.js"></script>
 </body>

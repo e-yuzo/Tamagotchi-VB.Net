@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Login.aspx.vb" Inherits="Tamagotchi.Login" %>
 
-<!-- Auto Event Wireup ? -->
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,9 +22,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="Highscore.aspx">HighScores <span class="sr-only">(current)</span></a>
                     </li>
-<%--                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>--%>
                 </ul>
                 <a class="navbar-brand" href="CreateAcc.aspx">Create Account</a>
             </div>
@@ -74,7 +70,7 @@
             </div>
         </div>
     </form>
-        <script src="Content/jquery-3.3.1.slim.min.js"></script>
+    <script src="Content/jquery-3.3.1.slim.min.js"></script>
     <script src="Content/popper.min.js"></script>
     <script src="Content/bootstrap.min.js"></script>
 </body>

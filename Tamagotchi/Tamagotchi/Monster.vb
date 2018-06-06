@@ -1,21 +1,6 @@
 ﻿Imports MongoDB.Bson
 
 Public Class Monster
-    'Public Property Id As ObjectId
-    'Public Property PlayerName As String
-    'Public Property MonsterName As String
-    'Public Property State As String
-    'Public Property Hunger As Double
-    'Public Property Happyness As Double
-    'Public Property Health As Double
-    'Public Property LastTimeState As DateTime
-    'Public Property LastSleep As DateTime
-    'Public Property LastShower As DateTime
-    'Public Property InitialTime As DateTime
-    'Public Property WokeUp As DateTime
-    'Public Property DropOff As DateTime
-
-
     Private Property Id As ObjectId
     Private Property PlayerName As String
     Private Property MonsterName As String
@@ -252,6 +237,8 @@ Public Class Monster
 
     Public Sub Sleep_Action()
         If (State = "Sleeping") Then
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\lights.wav")
             Dim minutesToSleep = Math.Abs((DateTime.UtcNow - WokeUp).TotalMinutes) / 3
             Dim minutesSlept = Math.Abs((DateTime.UtcNow - DropOff).TotalMinutes)
             InitialTime.AddMinutes(minutesSlept / 3)
@@ -262,6 +249,8 @@ Public Class Monster
             End If
             Change_State()
         Else
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\lights.wav")
             DropOff = DateTime.UtcNow
             State = "Sleeping"
         End If
@@ -269,16 +258,23 @@ Public Class Monster
 
     Public Sub Bath_Action()
         If (State <> "Sleeping") Then
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\cure.wav")
             If (State = "Dirty") Then
                 LastShower = DateTime.UtcNow
                 Health = Health + 15
                 Change_State()
             End If
+        Else
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\deny.wav")
         End If
     End Sub
 
     Public Sub Cure_Action()
         If (State <> "Sleeping") Then
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\cure.wav")
             If (State = "Sick") Then
                 Dim random As System.Random = New System.Random()
                 Health = (Health + 30) - (Hunger * (random.Next(Int(Hunger), Int(Hunger + 20)) / 1000))
@@ -287,6 +283,9 @@ Public Class Monster
             End If
             Change_State()
             Value_Limit()
+        Else
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\deny.wav")
         End If
     End Sub
 
@@ -297,11 +296,15 @@ Public Class Monster
             Hunger = (Hunger - 20) + (Health / 10.0)
             Change_State()
             Value_Limit()
+        Else
+            Dim play = New Utils()
+            play.PlaySound("C:\Users\Yuso\Desktop\Sounds\deny.wav")
         End If
-
     End Sub
 
     Public Sub Game_Action(score As Integer)
+        Dim play = New Utils()
+        play.PlaySound("C:\Users\Yuso\Desktop\Sounds\deny.wav")
         If (State <> "Sleeping") Then
             Hunger = Hunger + score
             Happyness = Happyness + (score * 3)

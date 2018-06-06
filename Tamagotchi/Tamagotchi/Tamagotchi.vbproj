@@ -235,6 +235,7 @@
     <Content Include="Content\bootstrap\bootstrap-grid.scss" />
     <Content Include="Style\circlebutton.css" />
     <Content Include="Style\navbar.css" />
+    <Content Include="Style\textColor.css" />
     <Content Include="TamagotchiPage.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -333,6 +334,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Music\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

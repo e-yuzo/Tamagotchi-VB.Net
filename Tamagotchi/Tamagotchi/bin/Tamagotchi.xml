@@ -161,6 +161,24 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
+<member name="F:Tamagotchi.TamagotchiPage._UpdatePanel9">
+<summary>
+Controle UpdatePanel9.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:Tamagotchi.TamagotchiPage._background">
+<summary>
+Controle background.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
 <member name="F:Tamagotchi.TamagotchiPage._Timer1">
 <summary>
 Controle Timer1.
@@ -236,15 +254,6 @@ Modificar a declaração do campo de movimento do arquivo de designer para o arq
 <member name="F:Tamagotchi.TamagotchiPage._statelabel">
 <summary>
 Controle statelabel.
-</summary>
-<remarks>
-Campo gerado automaticamente.
-Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-</remarks>
-</member>
-<member name="F:Tamagotchi.TamagotchiPage._belowimage">
-<summary>
-Controle belowimage.
 </summary>
 <remarks>
 Campo gerado automaticamente.
