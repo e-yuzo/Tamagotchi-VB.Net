@@ -22,6 +22,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="Highscore.aspx">HighScores <span class="sr-only">(current)</span></a>
                     </li>
+<%--                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>--%>
                 </ul>
                 <asp:LinkButton ID="signin" Text="Sign In" OnClick="Signin_Link" class="navbar-brand" runat="server" />
             </div>
@@ -61,7 +64,7 @@
             </div>
         </div>
     </form>
-    <script src="Content/jquery-3.3.1.slim.min.js"></script>
+        <script src="Content/jquery-3.3.1.slim.min.js"></script>
     <script src="Content/popper.min.js"></script>
     <script src="Content/bootstrap.min.js"></script>
 </body>

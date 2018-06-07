@@ -1,8 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AccountInfo.aspx.vb" Inherits="Tamagotchi.AccountInfo" %>
-
 <%@ Import Namespace="MongoDB.Driver.Builders" %>
 <%@ Import Namespace="MongoDB.Driver" %>
-<%@ Import Namespace="MongoDB.Bson" %>
+<%@ Import Namespace="MongoDB.Bson" %> 
 
 <!DOCTYPE html>
 
@@ -26,8 +25,12 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="Highscore.aspx">HighScores <span class="sr-only">(current)</span></a>
                     </li>
+                    <%--                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>--%>
                 </ul>
                 <asp:LinkButton ID="signout" Text="Sign Out" OnClick="SignOut_Event" class="navbar-brand" runat="server" />
+                <%-- <a ID="signout" runat="server" class="navbar-brand">Sign Out</a>--%>
             </div>
         </nav>
 
@@ -38,12 +41,14 @@
                         <h3 style="float: right;">Create Your Pet. Or... </h3>
                     </div>
                     <div class="container" style="margin-top: 20%;">
+                        <%--<form runat="server" id="form2" method="post" role="form" style="display: block;">--%>
                         <div class="form-group">
                             <asp:TextBox runat="server" type="text" name="petname" ID="petname" class="form-control" placeholder="Name Your Pet!" required="true" />
                         </div>
                         <div class="form-group">
                             <asp:Button Text="Create Pet" runat="server" type="submit" name="login-submit" ID="button1" class="form-control btn btn-danger" />
                         </div>
+                        <%--</form>--%>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -62,12 +67,9 @@
 
                             <div class="container col-md-3">
                                 <div class="card" style="width: 8rem;">
-                                    <a href='<%= pet("MonsterName") %>'>
-                                        <img class="card-img-top" src="Images/Fox.gif" alt="Kuriten" /></a>
+                                    <a href='<%= pet("MonsterName") %>'><img class="card-img-top" src="Images/Kuriten.gif" alt="Kuriten" /></a>
                                     <div class="card-body">
                                         <h5 class="card-title" style="text-align: center;"><%=pet("MonsterName")%></h5>
-                                        
-                                        <p style="text-align: center;"><b><%=pet("State")%></b></p>
                                     </div>
                                 </div>
                             </div>
@@ -77,9 +79,9 @@
                             <% End If %>
                             <% If (count = 0) Then %>
                             <div class="container">
-                                <h3>
-                                    <asp:Label ID="Registeredpets" class="badge badge-danger" Text="You Don't Have Any Pets!" runat="server" />
-                                </h3>
+                            <h3>
+                                <asp:Label ID="Registeredpets" class="badge badge-danger" Text="You Don't Have Any Pets!" runat="server" />
+                            </h3>
                             </div>
                             <% End If %>
                         </div>
@@ -88,7 +90,7 @@
             </div>
         </div>
     </form>
-    <script src="Content/jquery-3.3.1.slim.min.js"></script>
+        <script src="Content/jquery-3.3.1.slim.min.js"></script>
     <script src="Content/popper.min.js"></script>
     <script src="Content/bootstrap.min.js"></script>
 </body>

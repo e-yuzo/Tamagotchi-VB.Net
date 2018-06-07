@@ -1,19 +1,15 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="TamagotchiPage.aspx.vb" Inherits="Tamagotchi.TamagotchiPage" %>
 
 <!DOCTYPE html>
-<audio autoplay loop>
-    <source src="Music\Wander.mp3" />
-</audio>
-<html xmlns="http://www.w3.org/1999/xhtml">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="Style/textColor.css" />
     <link rel="stylesheet" href="Style/circlebutton.css" />
     <title>Tamagotchi</title>
 </head>
-<body style="height: 100%;">
+<body>
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,15 +26,11 @@
                 <asp:LinkButton ID="signout" Text="Sign Out" OnClick="SignOut_Event" class="navbar-brand" runat="server" />
             </div>
         </nav>
-        <asp:ScriptManager ID="ScriptManager1" runat="server" />
-        <asp:UpdatePanel ID="UpdatePanel9" UpdateMode="Always" runat="server">
-            <ContentTemplate>
-                <img runat="server" id="background" src="Images/Normal.jpg" alt="State" style="position:fixed;height:100%;width:100%;object-fit:fill;opacity:0.9" />
-            </ContentTemplate>
-        </asp:UpdatePanel>
+
         <br />
         <div class="row">
             <div class="col-md-9">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" />
                 <div>
                     <asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="2000">
                     </asp:Timer>
@@ -49,15 +41,15 @@
                     </Triggers>
                     <ContentTemplate>
                         <div class="container">
-                            <h6 class="textcolor">Hunger:
-                                <asp:Label ID="hungerlabel" Text="text" runat="server"/>%</h6>
+                            <h6>Hunger:
+                                <asp:Label ID="hungerlabel" Text="text" runat="server" />%</h6>
                             <div class="progress">
                                 <div class="progress-bar bg-warning" id="hungerBar" runat="server"></div>
                             </div>
                         </div>
                         <br />
                         <div class="container">
-                            <h6 class="textcolor">Health:
+                            <h6>Health:
                                 <asp:Label ID="healthlabel" Text="text" runat="server" />%</h6>
                             <div class="progress">
                                 <div class="progress-bar bg-success" id="healthBar" runat="server"></div>
@@ -65,7 +57,7 @@
                         </div>
                         <br />
                         <div class="container">
-                            <h6 class="textcolor">Happyness:
+                            <h6>Happyness:
                                 <asp:Label ID="happylabel" Text="text" runat="server" />%</h6>
                             <div class="progress">
                                 <div class="progress-bar bg-success" id="happynessBar" runat="server"></div>
@@ -73,18 +65,24 @@
                         </div>
                         <br />
                         <div class="container">
-                            <h6 class="textcolor">State:
+                            <h6>State:
                                 <asp:Label ID="statelabel" Text="text" runat="server" /></h6>
                         </div>
-                        <%--                        <div style="position: absolute;">
-                            <img id="belowimage" runat="server" src="Images/Normal.jpg" alt="State" style="width: 1000px; height: 345px;" />
-                        </div>--%>
-                        <div style="position: absolute;">
-                            <img id="topImage" runat="server" src="Images/Fox.gif" alt="Fox" style="max-width: 200px; max-height: 200px; margin-left: 360px; margin-top: 190px;" />
-                        </div>
+                        <%--Images--%>
+                        <%--<div id="under" style="left: 500px; top: 485px; position: absolute"> <img src="/img_articles/8470/image2.gif"> </div>--%>
+                        <%--<div class="container">--%>
+                            <div style="position:absolute;">
+                                <img id="belowimage" runat="server" src="Images/Normal.jpg" alt="State" style="width:1000px;height:345px;"/>
+                            </div>
+                            <div style="position:absolute;">
+                                <img id="topImage" runat="server" src="Images/Fox.gif" alt="Fox" style="max-width:200px; max-height:200px; margin-left: 360px; margin-top: 190px;"/>
+                            </div>
+                        <%--</div>--%>
+                        <%--Images--%>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
+            <%--          <div class="col-md-1"></div>--%>
             <div class="col-md-2">
                 <div class="container">
                     <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
@@ -93,7 +91,7 @@
                         </Triggers>
                         <ContentTemplate>
                             <div class="panel panel-default" style="float: right;">
-                                <h5 class="textcolor">Time:
+                                <h5>Time:
                                 <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                                 </h5>
                             </div>
@@ -128,6 +126,14 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                             <br />
+                            <%--                            <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Button runat="server" ID="bedbutton" class="btn btn-warning btn-circle btn-xl" Style="background-image: url('Images/bed.png'); background-size: 45px 45px; background-repeat: no-repeat; background-position: center;"></asp:Button>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="bedbutton" EventName="Click" />
+                                </Triggers>
+                            </asp:UpdatePanel>--%>
                             <br />
                             <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
@@ -146,11 +152,11 @@
                                     <asp:AsyncPostBackTrigger ControlID="gamebutton" EventName="Click" />
                                 </Triggers>
                             </asp:UpdatePanel>
+                            <%--Modal--%>
                             <div>
                                 <asp:Timer ID="Timer2" OnTick="Game_Tick" runat="server" Interval="700">
                                 </asp:Timer>
                             </div>
-                            <%--Modal--%>
                             <div runat="server" class="modal" id="modalGame" tabindex="-1" role="dialog" aria-labelledby="Simon Says" aria-hidden="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -186,9 +192,9 @@
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </div>
+                                    <%--Modal--%>
                                 </div>
                             </div>
-                            <%--Modal--%>
                         </div>
                     </div>
                 </div>
